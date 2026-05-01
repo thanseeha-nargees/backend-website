@@ -6,7 +6,7 @@ export const getAllProducts = async (req, res) => {
         const { page, limit, skip } = pagination(req.query)
         const { keyword, brand, category } = req.query
 
-        const filter = { isDeleted: { $ne: true } }
+        const filter = { isDeleted: false }
 
         if (brand) {
             filter.brand = brand;
@@ -16,11 +16,11 @@ export const getAllProducts = async (req, res) => {
             filter.category = category;
         }
 
-        if (keyword && keyword.trim()) {
+        if (keyword) {
             filter.$or = [
-                { name: { $regex: keyword.trim(), $options: "i" } },
-                { brand: { $regex: keyword.trim(), $options: "i" } },
-                { category: { $regex: keyword.trim(), $options: "i" } }
+                { name: { $regex: keyword, $options: "i" } },
+                { brand: { $regex: keyword, $options: "i" } },
+                { category: { $regex: keyword , $options: "i" } }
             ]
         }
 
@@ -50,7 +50,7 @@ export const getProductById = async (req, res) => {
     try {
         const product = await Product.findOne({
             _id: req.params.id,
-            isDeleted: { $ne: true }
+            isDeleted: false
         })
 
         if (!product) {
