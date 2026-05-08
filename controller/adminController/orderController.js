@@ -1,4 +1,4 @@
-import Order from "../../models/order.js";
+import Order from "../../models/Order.js";
 import User from "../../models/User.js";
 import { pagination } from "../../utils/pagination.js";
 import mongoose from "mongoose";

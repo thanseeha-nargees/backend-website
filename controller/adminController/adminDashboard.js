@@ -1,6 +1,6 @@
 
-import Order from "../../models/order.js";
-import Product from "../../models/products.js";
+import Order from "../../models/Order.js";
+import Product from "../../models/Product.js";
 import User from "../../models/User.js";
 
 export const getAdminDashboard = async (req, res) => {

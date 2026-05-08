@@ -12,7 +12,7 @@ export const adminLogin = async (req, res) => {
                 success: false,
                 message: "Email and password are required"
             })
-        }
+        }   
 
         const admin = await User.findOne({
             email,
