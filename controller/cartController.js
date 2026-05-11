@@ -37,18 +37,24 @@ export const addTocart = async (req, res) => {
 
         const cartItem = await Cart.findOne({ productId, userId });
 
-        if (cartItem) {
-            cartItem.quantity += Number(quantity);
+       if (cartItem) {
 
-            await cartItem.save()
+            const updateCart = await Cart.findOneAndUpdate(
+                { productId, userId },
+                {
+                    $inc: { quantity: quantity }
+                },
+                {
+                    new: true
+                }
+            )
             return res.status(200).json({
                 success: true,
                 message: "Cart updated",
-                cart: cartItem,
+                cart: updatedCart,
             })
 
         }
-
         const newItem = await Cart.create({
             userId,
             productId,
